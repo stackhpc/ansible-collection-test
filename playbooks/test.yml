@@ -12,5 +12,5 @@
         mode: ug=rwX,o=X
     - name: Dump gathered facts
       copy:
-        content: "{{ hostvars[ansible_hostname] | to_nice_yaml }}"
+        content: "{{ hostvars | to_nice_yaml }}"
         dest: "{{ output_dir }}/facts.yml"
