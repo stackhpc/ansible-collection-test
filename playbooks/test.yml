@@ -1,0 +1,16 @@
+- hosts: all
+  become: yes
+  gather_facts: yes
+  vars:
+    output_dir: /var/test_collection
+  tasks:
+    - name: Create {{ output_dir }}
+      file:
+        path: "{{ output_dir }}"
+        state: directory
+        owner: root
+        mode: ug=rwX,o=X
+    - name: Dump gathered facts
+      copy:
+        content: "{{ hostvars[ansible_hostname] | to_nice_yaml }}"
+        dest: "{{ output_dir }}/facts.yml"
